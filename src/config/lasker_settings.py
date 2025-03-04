@@ -1,6 +1,6 @@
 class LaskerConfig:
     # App settings
-    DRAW_COUNT = 20
+    DRAW_COUNT = 30
     GAME_TIMEOUT = 5
     HAND_SIZE = 10
     DEFAULT_RAND = True
