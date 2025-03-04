@@ -24,7 +24,8 @@ class LaskerMorris(AbstractGame):
         debug: bool = LaskerConfig.DEFAULT_DEBUG,
         logging: bool = LaskerConfig.DEFAULT_LOG,
         port: int = Config.DEFAULT_WEB_PORT,
-        print_board: bool = LaskerConfig.PRINT_BOARD
+        print_board: bool = LaskerConfig.PRINT_BOARD,
+        draw_count: int = LaskerConfig.DRAW_COUNT,
     ):
         """Initialize game with player commands and game settings.
 
@@ -37,6 +38,7 @@ class LaskerMorris(AbstractGame):
             debug: Enable debug output if True
             logging: Enable logging if True
         """
+        self.draw_count = draw_count
         self.move_timeout = timeout + 0.5
         self.game_history = []
         self.board_states = []
@@ -636,7 +638,7 @@ class LaskerMorris(AbstractGame):
     def determine_winner(self) -> Optional[LaskerPlayer]:
         """Check win conditions and return winner if game is over."""
         # Check for draw condition
-        if self.moves_without_taking >= 20:
+        if self.moves_without_taking >= self.draw_count:
             self._is_game_over = True
             message = "Draw!"
             click.echo(message)

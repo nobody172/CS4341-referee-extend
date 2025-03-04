@@ -52,6 +52,14 @@ init()
     default=LaskerConfig.DEFAULT_DEBUG,
     help="Enable/disable debug output",
 )
+@click.option(
+    "--drawcount",
+    "-dc",
+    default=LaskerConfig.DRAW_COUNT,
+    type=int,
+    help="Number of moves without removal before calling a draw",
+)
+
 def start_game(
     player1: str,
     player2: str,
@@ -61,6 +69,7 @@ def start_game(
     port: int,
     log: bool,
     debug: bool,
+    drawcount: int,
 ) -> None:
     """🎮 Start a new game of Lasker Morris!"""
     try:
@@ -73,7 +82,8 @@ def start_game(
             debug=debug,
             logging=log,
             port=port,
-            print_board=debug
+            print_board=debug,
+            draw_count=drawcount
         )
         winner = game.run_game()
 
